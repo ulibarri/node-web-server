@@ -1,6 +1,7 @@
 const express=require('express');
 const hbs=require('hbs');
 const fs = require('fs');
+const port = process.env.PORT || 3000;
 let app = express();
 hbs.registerPartials(`${__dirname}/views/partials`);
 hbs.registerHelper('getCurrentYear',()=>{
@@ -22,9 +23,11 @@ app.use((req,res,next)=>{
     next();
 });
 
-app.use((req,res,next)=>{
-    res.render('maintenance.hbs');
-});
+//use this if your web site is under maintenanace and you want to redirect
+//all the routes to the maintenance page
+// app.use((req,res,next)=>{
+//     res.render('maintenance.hbs');
+// });
 app.use(express.static(`${__dirname}/public`));
 app.get('/',(request, response)=>{
 //     let html=`<html>
@@ -86,6 +89,6 @@ app.get('/bad',(request,response)=>{
         errorMessage: 'unable to handle request'
     });
 });
-app.listen(3000,()=>{
-    console.log('server up&running on port 3000');
+app.listen(port,()=>{
+    console.log('server up&running on port ' + port);
 });
