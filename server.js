@@ -89,6 +89,12 @@ app.get('/bad',(request,response)=>{
         errorMessage: 'unable to handle request'
     });
 });
+app.get('/projects',(request,response)=>{
+    response.render('portfolio.hbs',{
+        welcomeMessage: 'Hello, this is the portfolio page',
+        pageTitle:'Portfolio'
+        });
+    });
 app.listen(port,()=>{
     console.log('server up&running on port ' + port);
 });
